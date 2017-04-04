@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2016 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+
+
+-->
+
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+	
+	<!-- DATA -->
+	<bean class="com.hand.wanggangwebservices.data.UserDataList">
+		<property name="users" type="java.util.List&lt;com.hand.wanggangwebservices.data.UserData>"/>
+	</bean>
+
+	<bean class="com.hand.wanggangwebservices.data.UserData" >
+		<property name="defaultBillingAddress" type="com.hand.wanggangwebservices.data.AddressData"/>
+		<property name="defaultShippingAddress" type="com.hand.wanggangwebservices.data.AddressData"/>
+		<property name="addresses" type="java.util.List&lt;com.hand.wanggangwebservices.data.AddressData>"/>
+		<property name="description" type="String"/>
+		<property name="firstName" type="String"/>
+		<property name="lastName" type="String"/>
+	</bean>
+	
+	<bean class="com.hand.wanggangwebservices.data.AddressDataList">
+		<property name="addresses" type="java.util.List&lt;com.hand.wanggangwebservices.data.AddressData>"/>
+	</bean>
+	
+	<bean class="com.hand.wanggangwebservices.data.AddressData">
+		<property name="streetname" type="String"/>
+		<property name="streetnumber" type="String"/>
+		<property name="town" type="String"/>
+		<property name="shippingAddress" type="boolean"/>
+		<property name="billingAddress" type="boolean"/>
+		<property name="defaultAddress" type="boolean"/>
+		<property name="formattedAddress" type="String"/>
+	</bean>
+
+	<!-- DTO -->
+	<bean class="com.hand.wanggangwebservices.dto.SampleWsDTO">
+		<property name="value" type="String"/>
+	</bean>
+
+	<bean class="com.hand.wanggangwebservices.dto.UsersListWsDTO">
+		<property name="users" type="java.util.List&lt;com.hand.wanggangwebservices.dto.UserWsDTO>"/>
+	</bean>
+
+	<bean class="com.hand.wanggangwebservices.dto.UserWsDTO">
+		<property name="addresses" type="java.util.List&lt;com.hand.wanggangwebservices.dto.AddressWsDTO>"/>
+		<property name="firstName" type="String"/>
+		<property name="lastName" type="String"/>
+		<property name="info" type="String" />
+		<property name="billingAddress" type="com.hand.wanggangwebservices.dto.AddressWsDTO"/>
+		<property name="shippingAddress" type="com.hand.wanggangwebservices.dto.AddressWsDTO"/>
+	</bean>
+	
+	<bean class="com.hand.wanggangwebservices.dto.AddressListWsDTO">
+		<property name="addresses" type="java.util.List&lt;com.hand.wanggangwebservices.dto.AddressWsDTO>"/>
+	</bean>
+	
+	<bean class="com.hand.wanggangwebservices.dto.AddressWsDTO">
+		<property name="street" type="String"/>
+		<property name="town" type="String"/>
+		<property name="streetNumber" type="String"/>
+	</bean>
+	
+	<bean class="com.hand.wanggangwebservices.dto.TestMapWsDTO">
+		<property name="stringMap" type="java.util.Map&lt;String,String>"/>
+		<property name="integerMap" type="java.util.Map&lt;String,Integer>"/>
+	</bean>
+
+
+	<bean class="com.hand.wanggangwebservices.dto.BookDTO">
+		<property name="pk" type="java.lang.Long"/>
+		<property name="number" type="java.lang.String"/>
+		<property name="author" type="java.lang.String"/>
+		<property name="publisher" type="java.lang.String"/>
+		<property name="name" type="java.lang.String"/>
+		<property name="status" type="boolean"/>
+	</bean>
+
+	<bean class="com.hand.wanggangwebservices.dto.BorrowDTO">
+		<property name="readerName" type="java.lang.String"/>
+		<property name="borrowDate" type="java.lang.String"/>
+		<property name="returnDate" type="java.lang.String"/>
+		<property name="overdueStatue" type="java.lang.Boolean"/>
+	</bean>
+
+
+	<bean class="com.hand.wanggangwebservices.dto.BorrowInfoDTO">
+		<property name="bookName" type="java.lang.String"/>
+		<property name="authorName" type="java.lang.String"/>
+		<property name="borrowRecords" type="java.util.List&lt;com.hand.wanggangwebservices.dto.BorrowDTO>"/>
+	</bean>
+
+	<bean class="com.hand.wanggangwebservices.dto.OverdueReaderInfoDTO">
+		<property name="cardid" type="java.lang.String"/>
+		<property name="name" type="java.lang.String"/>
+		<property name="bookNum" type="java.lang.String"/>
+		<property name="bookName" type="java.lang.String"/>
+		<property name="borrowDate" type="java.lang.String"/>
+		<property name="availableDays" type="java.lang.Integer"/>
+	</bean>
+
+</beans>

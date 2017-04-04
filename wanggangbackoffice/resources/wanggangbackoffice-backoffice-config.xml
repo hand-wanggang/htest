@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+
+	<context component="create-wizard" type="CustomReader">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ReaderWizard" title="create.reader.title">
+			<wz:prepare id="readerPrepare">
+				<wz:initialize property="newReader" type="CustomReader" />
+			</wz:prepare>
+			<wz:step id="step1" label="create.reader.general.label" sublabel="create.reader.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newReader">
+						<wz:property qualifier="cardid"/>
+						<wz:property qualifier="name" />
+						<wz:property qualifier="gender" />
+						<wz:property qualifier="age"/>
+						<wz:property qualifier="phone"/>
+						<wz:property qualifier="email"/>
+						<wz:property qualifier="address"/>
+						<wz:property qualifier="availabledays"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done visible="!#empty(newReader.name)">
+						<wz:save property="newReader" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="BookManager">
+				<n:type-node id="CustomReader" code="CustomReader"/>
+				<n:type-node id="Books" code="Book"/>
+				<n:type-node id="Borrow" code="Borrow"/>
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+	<context type="CustomReader" component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="cardid"/>
+			<list:column qualifier="name"/>
+			<list:column qualifier="gender"/>
+			<list:column qualifier="age"/>
+			<list:column qualifier="phone"/>
+			<list:column qualifier="email"/>
+			<list:column qualifier="address"/>
+			<list:column qualifier="availabledays"/>
+		</list:list-view>
+	</context>
+
+	<!--=================================================================================================-->
+	<context component="create-wizard" type="Book">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="BookWizard" title="create.book.title">
+			<wz:prepare id="bookPrepare">
+				<wz:initialize property="newBook" type="Book" />
+			</wz:prepare>
+			<wz:step id="step1" label="create.book.general.label" sublabel="create.book.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newBook">
+						<wz:property qualifier="number"/>
+						<wz:property qualifier="name" />
+						<wz:property qualifier="author" />
+						<wz:property qualifier="publisher"/>
+						<wz:property qualifier="status"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done visible="!#empty(newBook.number)">
+						<wz:save property="newBook" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context type="Book" component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="number"/>
+			<list:column qualifier="name"/>
+			<list:column qualifier="author"/>
+			<list:column qualifier="publisher"/>
+			<list:column qualifier="status"/>
+		</list:list-view>
+	</context>
+
+	<!--=================================================================================================-->
+	<context component="create-wizard" type="Borrow">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="BorrowWizard" title="create.borrow.title">
+			<wz:prepare id="borrowPrepare">
+				<wz:initialize property="newBorrow" type="Borrow" />
+			</wz:prepare>
+			<wz:step id="step1" label="create.borrow.general.label" sublabel="create.borrow.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newBorrow">
+						<wz:property qualifier="reader"/>
+						<wz:property qualifier="book" />
+						<wz:property qualifier="borrowDate"/>
+						<wz:property qualifier="returnDate"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done visible="!#empty('a')">
+						<wz:save property="newBorrow" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<context type="Borrow" component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="reader"/>
+			<list:column qualifier="book"/>
+			<list:column qualifier="borrowDate"/>
+			<list:column qualifier="returnDate"/>
+		</list:list-view>
+	</context>
+
+	<!--<context type="CustomReader" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>-->
+
+	<context type="Book" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>name</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+</config>

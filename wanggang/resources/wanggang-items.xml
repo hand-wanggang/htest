@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="ReaderGender" autocreate="true" generate="true">
+			<value code="MALE"/>
+			<value code="FEMALE"/>
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+		<relation code="ReaderBorrowRelation" localized="false" generate="true" autocreate="true">
+			<sourceElement type="CustomReader" qualifier="reader" cardinality="one"/>
+			<targetElement type="Borrow" qualifier="borrows" cardinality="many"/>
+		</relation>
+
+		<relation code="BookBorrowRelation" localized="false" generate="true" autocreate="true">
+			<sourceElement type="Book" qualifier="book" cardinality="one"/>
+			<targetElement type="Borrow" qualifier="borrows" cardinality="many"/>
+		</relation>
+	</relations>
+
+	<itemtypes>
+
+		<itemtype code="CustomReader" generate="true" autocreate="true">
+			<deployment table="WangGangCustomReader" typecode="10125" />
+			<attributes>
+				<attribute qualifier="cardid" type="java.lang.String" >
+					<persistence type="property"/>
+					<modifiers optional="false" unique="true"/>
+				</attribute>
+
+				<attribute  qualifier="name" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+
+				<attribute qualifier="gender" type="ReaderGender">
+					<persistence type="property" />
+					<defaultvalue>em().getEnumerationValue("ReaderGender","MALE")</defaultvalue>
+				</attribute>
+
+				<attribute qualifier="age" type="java.lang.Integer">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+					<defaultvalue>Integer.valueOf(0)</defaultvalue>
+				</attribute>
+
+				<attribute qualifier="phone" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+
+				<attribute qualifier="email" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+				<attribute qualifier="address" type="localized:java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+
+				<attribute qualifier="availabledays" type="java.lang.Integer">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+					<defaultvalue>Integer.valueOf(14)</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+
+		<itemtype code="Book"
+				  autocreate="true"
+				  generate="true">
+			<deployment table="WangGangBook" typecode="10126"/>
+
+			<attributes>
+				<attribute qualifier="number" type="java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false" unique="true"/>
+				</attribute>
+
+				<attribute qualifier="author" type="localized:java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+
+				<attribute qualifier="publisher" type="localized:java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+
+				<attribute qualifier="status" type="boolean">
+					<persistence type="property"/>
+					<defaultvalue>Boolean.valueOf(true)</defaultvalue>
+				</attribute>
+
+			</attributes>
+
+		</itemtype>
+
+
+		<itemtype code="Borrow"
+				  autocreate="true"
+				  generate="true">
+			<deployment table="WangGangBorrow" typecode="10127"/>
+			<attributes>
+				<!--<attribute qualifier="reader" type="Reader">
+					<persistence type="property"/>
+					<modifiers optional="false" unique="true"/>
+				</attribute>
+				<attribute qualifier="book" type="Book">
+					<persistence type="property"/>
+					<modifiers unique="true" optional="false"/>
+				</attribute>-->
+
+				<attribute qualifier="borrowDate" type="java.util.Date">
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+
+				<attribute qualifier="returnDate" type="java.util.Date">
+					<persistence type="property"/>
+					<modifiers optional="true"/>
+				</attribute>
+
+				<attribute qualifier="overdueStatue" type="boolean">
+					<persistence type="property"/>
+					<defaultvalue>Boolean.valueOf(false)</defaultvalue>
+				</attribute>
+			</attributes>
+
+		</itemtype>
+
+	</itemtypes>
+</items>
